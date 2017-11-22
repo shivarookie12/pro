@@ -12,20 +12,21 @@ public class Solution {
 	public static void main(String[] args) throws IOException {
 		SessionFactory sf = new Configuration().configure().buildSessionFactory();
 		Session session = sf.openSession();
+		session.beginTransaction();
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("Enter Id : ");
-		int id = Integer.valueOf(bf.readLine());
 		System.out.print("Enter Name : ");
 		String name = bf.readLine();
 		System.out.print("Enter Email : ");
 		String email = bf.readLine();
 		System.out.print("Enter Phone : ");
 		long phone = Long.valueOf(bf.readLine());
-		Employee employee = new Employee(id, name, email, phone);
+		Employee employee = new Employee(name, email, phone);
 		System.out.println("Id :" + " " + employee.getId());
 		System.out.println("Name :" + " " + employee.getName());
 		System.out.println("Email :" + " " + employee.getEmail());
 		System.out.println("Phone :" + " " + employee.getPhone());
+		session.save(employee);
+		session.getTransaction().commit();
 		session.close();
 	}
 
