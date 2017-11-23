@@ -1,8 +1,10 @@
 package com.vehicle;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("two")
 public class TwoWheeler extends Vehicle {
 	public String steeringHandle;
 
